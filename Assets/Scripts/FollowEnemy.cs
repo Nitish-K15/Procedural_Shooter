@@ -32,14 +32,27 @@ public class FollowEnemy : Target
     {
         agent.SetDestination(target.position);
         anim.SetTrigger("isRunning");
+        anim.SetBool("Run", true);
+        anim.SetBool("Attack", false);
     }
     private void AttackPlayer()
     {
-        isAttacking = true;
-        agent.SetDestination(transform.position);
-        transform.LookAt(player);
-        transform.eulerAngles = new Vector3(0f, transform.rotation.eulerAngles.y, 0f);
-        anim.SetTrigger("isAttacking");
+        anim.SetBool("Run", false);
+        anim.SetBool("Attack", true);
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            agent.SetDestination(transform.position);
+            transform.LookAt(player);
+            transform.eulerAngles = new Vector3(0f, transform.rotation.eulerAngles.y, 0f);
+            anim.SetTrigger("isAttacking");
+            Invoke(nameof(ResetAttack), baseEnemy.timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        isAttacking = false;
     }
 
     public override void TakeDamage(float amount)

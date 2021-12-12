@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShootingEnemy :Target
 {
     public BaseEnemy Base;
-    public Transform target;
+    public Transform target,FireSpawn;
     private NavMeshAgent agent;
     public LayerMask whatIsPlayer;
     public GameObject projectile;
@@ -36,26 +36,24 @@ public class ShootingEnemy :Target
     private void ChasePlayer()
     {
         anim.SetTrigger("isRunning");
+        anim.SetBool("Run",true);
+        anim.SetBool("Attack", false);
         agent.SetDestination(target.position);
     }
 
     private void AttackPlayer()
     {
-        anim.SetTrigger("isAttacking");
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
-
+        anim.SetBool("Attack", true);
+        anim.SetBool("Run", false);
+        anim.SetTrigger("isAttacking");
         transform.LookAt(target);
         transform.eulerAngles = new Vector3(0f, transform.rotation.eulerAngles.y, 0f);
 
         if (!alreadyAttacked)
         {
-            ///Attack code here
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
             ///End of attack code
-
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), Base.timeBetweenAttacks);
         }
@@ -70,5 +68,21 @@ public class ShootingEnemy :Target
         Health = Health - amount;
         if (Health <= 0)
             Destroy(this.gameObject);
+    }
+
+    public void ShootFire()
+    {
+        if (!alreadyAttacked)
+        {
+            Rigidbody rb = Instantiate(projectile, FireSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
+            rb.AddForce(transform.up * 3f, ForceMode.Impulse);
+        }
+    }
+
+    public void ShootLightning()
+    {
+        Rigidbody rb = Instantiate(projectile, FireSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
+        rb.AddForce((target.transform.position - this.transform.position).normalized*10f, ForceMode.Impulse);
     }
 }
