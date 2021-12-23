@@ -190,11 +190,11 @@ MonoBehaviour:
   - room: {fileID: 8013565617971394847, guid: 785dcac338e801b47b1fa8cc26cddf01, type: 3}
     minPosition: {x: 0, y: 0}
     maxPosition: {x: 3, y: 3}
-    obligatory: 1
+    obligatory: 0
   - room: {fileID: 8013565617971394847, guid: f992834aa80c5d54693135d50842bd59, type: 3}
     minPosition: {x: 0, y: 0}
     maxPosition: {x: 3, y: 3}
-    obligatory: 1
+    obligatory: 0
   - room: {fileID: 8013565617971394847, guid: d45d027f39dc02e44b2a492086f54d97, type: 3}
     minPosition: {x: 4, y: 4}
     maxPosition: {x: 3, y: 3}
