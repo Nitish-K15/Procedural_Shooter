@@ -58,12 +58,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {fileID: 11400000, guid: 25339892e8cddca438dbefe3fba271dd, type: 2}
   target: {fileID: 0}
-  FireSpawn: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
   projectile: {fileID: 5545207513189588879, guid: ac71955bf93f58e4d96cb42b0e3c9c6f,
     type: 3}
+  FireSpawn: {fileID: 359407081}
   playerInAttackRange: 0
 --- !u!195 &768912010
 NavMeshAgent:

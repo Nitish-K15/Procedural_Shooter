@@ -39,11 +39,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 4986327083041927845}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 1.8342428
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.9796424, z: 0}
 --- !u!114 &1594216116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,11 +58,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {fileID: 11400000, guid: 25339892e8cddca438dbefe3fba271dd, type: 2}
   target: {fileID: 0}
-  FireSpawn: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
-  projectile: {fileID: 0}
+  projectile: {fileID: 7620437141238565764, guid: 6f329251c9af7c349b7dba9fec163da2,
+    type: 3}
+  FireSpawn: {fileID: 3976363968656739365}
   playerInAttackRange: 0
 --- !u!195 &1594216117
 NavMeshAgent:

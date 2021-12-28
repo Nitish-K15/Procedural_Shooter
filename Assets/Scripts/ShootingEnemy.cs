@@ -6,14 +6,15 @@ using UnityEngine;
 public class ShootingEnemy :Target
 {
     public BaseEnemy Base;
-    public Transform target,FireSpawn;
+    public Transform target;
     private NavMeshAgent agent;
     public LayerMask whatIsPlayer;
-    public GameObject projectile;
+    public GameObject projectile,FireSpawn;
     public bool  playerInAttackRange;
     private bool alreadyAttacked;
     private float Health;
     private Animator anim;
+
     void Start()
     {
         target = GameObject.Find("Player").transform;
@@ -74,7 +75,7 @@ public class ShootingEnemy :Target
     {
         if (!alreadyAttacked)
         {
-            Rigidbody rb = Instantiate(projectile, FireSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
+            Rigidbody rb = Instantiate(projectile, FireSpawn.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
             rb.AddForce(transform.up * 3f, ForceMode.Impulse);
         }
@@ -82,7 +83,7 @@ public class ShootingEnemy :Target
 
     public void ShootLightning()
     {
-        Rigidbody rb = Instantiate(projectile, FireSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
+        Rigidbody rb = Instantiate(projectile, FireSpawn.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb.AddForce((target.transform.position - this.transform.position).normalized*10f, ForceMode.Impulse);
     }
 }
