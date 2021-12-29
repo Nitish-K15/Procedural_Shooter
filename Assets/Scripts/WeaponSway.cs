@@ -8,7 +8,18 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float smooth;
     [SerializeField] private float multiplier;
 
-    private void Update()
+    [Header("References")]
+    public Animator weaponAnimator;
+
+    [Header("Swayvariables")]
+    public float swayAmountA = 1;
+    public float swayAmountB = 2;
+    public float swayScale = 600;
+    public float swayLerpSpeed = 14;
+    public float swayTime;
+    public Vector3 swayPosition;
+
+    private void FixedUpdate()
     {
         // get mouse input
         float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;
@@ -22,5 +33,34 @@ public class WeaponSway : MonoBehaviour
 
         // rotate 
         transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smooth * Time.deltaTime);
+
+        //weaponAnimator.speed = FirstPersonController.weaponAnimationSpeed;
+
+        if(FirstPersonController.weaponAnimationSpeed>0)
+        {
+            weaponAnimator.SetBool("isWalking", true);
+        }
+        else
+        {
+            weaponAnimator.SetBool("isWalking", false);
+        }
+
+        CalculateSway();
+    }
+    private void CalculateSway()
+    {
+        var targetPosition = LissajousCurve(swayTime, swayAmountA, swayAmountB)/swayScale;
+        swayPosition = Vector3.Lerp(swayPosition, targetPosition, Time.smoothDeltaTime * swayLerpSpeed);
+        swayTime += Time.deltaTime;
+
+        if(swayTime>6.3f)
+        {
+            swayTime = 0;
+        }
+        transform.localPosition = swayPosition;
+    }
+    private Vector3 LissajousCurve(float Time, float A, float B)
+    {
+        return new Vector3(Mathf.Sin(Time), A * Mathf.Sin(B * Time + Mathf.PI));
     }
 }

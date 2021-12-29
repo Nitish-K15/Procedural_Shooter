@@ -41,6 +41,8 @@ public class FirstPersonController : MonoBehaviour
     private Vector2 CurrentInput;
 
     private float rotationX;
+    private float finalSpeed;
+    public static float weaponAnimationSpeed;
    
     void Start()
     {
@@ -61,11 +63,17 @@ public class FirstPersonController : MonoBehaviour
                 HandleJump();
             ApplyFinalMovement();
         }
+        finalSpeed = walkspeed + Modifiers.instance.Speed;
+        weaponAnimationSpeed = characterController.velocity.magnitude / finalSpeed;
+        if(weaponAnimationSpeed>1)
+        {
+            weaponAnimationSpeed = 1;
+        }
     }
 
     private void HandleMovement() //Handle Player Movement
     {
-        CurrentInput = new Vector2((isSprinting ? sprintspeed : walkspeed) * Input.GetAxis("Vertical"), (isSprinting ? sprintspeed : walkspeed) * Input.GetAxis("Horizontal"));
+        CurrentInput = new Vector2((isSprinting ? sprintspeed : finalSpeed) * Input.GetAxis("Vertical"), (isSprinting ? sprintspeed : finalSpeed) * Input.GetAxis("Horizontal"));
         float moveDirectionY = MoveDirection.y;
         MoveDirection = (transform.TransformDirection(Vector3.forward) * CurrentInput.x) + (transform.TransformDirection(Vector3.right) * CurrentInput.y);
         MoveDirection.y = moveDirectionY;
