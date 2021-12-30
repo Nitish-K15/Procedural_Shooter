@@ -73,12 +73,9 @@ public class ShootingEnemy :Target
 
     public void ShootFire()
     {
-        if (!alreadyAttacked)
-        {
             Rigidbody rb = Instantiate(projectile, FireSpawn.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
             rb.AddForce(transform.up * 3f, ForceMode.Impulse);
-        }
     }
 
     public void ShootLightning()

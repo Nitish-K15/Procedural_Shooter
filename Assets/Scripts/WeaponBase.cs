@@ -12,4 +12,6 @@ public class WeaponBase : ScriptableObject
     public float timeBetweenShooting;
     public int magazineSize;
     public bool allowButtonHold;
+    public int bulletsPerTap;
+    public float timeBetweeShots;
 }

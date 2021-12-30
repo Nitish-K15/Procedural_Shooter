@@ -6,7 +6,7 @@ using UnityEngine;
 public class BaseEnemy : ScriptableObject
 {
     public float Health;
-    public float Damage;
+    public int Damage;
     public float AttackRange;
     public float timeBetweenAttacks;
 }

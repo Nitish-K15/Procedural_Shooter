@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
 {
     public WeaponBase weaponBase;
     bool shooting, readyToShoot, reloading;
-    int bulletsLeft;
+    int bulletsLeft,bulletsShot;
     public ParticleSystem muzzleFlash;
     public GameObject impactPoint;
     public Text text;
@@ -40,6 +40,7 @@ public class Gun : MonoBehaviour
         //Shoot
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
+            bulletsShot = weaponBase.bulletsPerTap;
             Shoot();
         }
     }
@@ -79,8 +80,12 @@ public class Gun : MonoBehaviour
 
         Debug.Log(finalDamage);
         bulletsLeft--;
+        bulletsShot--;
 
         Invoke("ResetShot", finalFireDelay);
+
+        if (bulletsShot > 0 && bulletsLeft > 0)
+            Invoke("Shoot", weaponBase.timeBetweeShots);
     }
 
     private void ResetShot()

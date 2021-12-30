@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public static int orbsCollected = 1;
+
     public bool CanMove { get; private set; } = true;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
     private bool shouldJump => characterController.isGrounded && Input.GetKeyDown(jumpKey);
@@ -43,6 +45,10 @@ public class FirstPersonController : MonoBehaviour
     private float rotationX;
     private float finalSpeed;
     public static float weaponAnimationSpeed;
+
+    public int Health;
+    public GameObject redScreen;
+    public bool isHit;
    
     void Start()
     {
@@ -102,5 +108,22 @@ public class FirstPersonController : MonoBehaviour
         }
 
         characterController.Move(MoveDirection * Time.deltaTime);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (!isHit)
+            StartCoroutine(ApplyDamage(damage));
+    }
+
+    IEnumerator ApplyDamage(int damage)
+    {
+        isHit = true;
+        redScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        redScreen.SetActive(false);
+        Health = Health - damage;
+        yield return new WaitForSeconds(0.5f);
+        isHit = false;
     }
 }

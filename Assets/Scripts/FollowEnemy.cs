@@ -64,4 +64,13 @@ public class FollowEnemy : Target
             GetComponentInParent<EnemyCount>().CheckClear();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            gameObject.GetComponent<FirstPersonController>().TakeDamage(baseEnemy.Damage);
+            Debug.Log("called");
+        }
+    }
 }

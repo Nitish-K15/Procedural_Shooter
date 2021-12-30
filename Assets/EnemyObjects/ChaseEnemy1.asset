@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 20
   Damage: 5
-  AttackRange: 2
+  AttackRange: 1.6
   timeBetweenAttacks: 1

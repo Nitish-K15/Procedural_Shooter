@@ -9,7 +9,7 @@ public class RoomBehaviour : MonoBehaviour
     public GameObject[] doors;
     //public GameObject CoinSpawn;
     public int EnemyCount;
-    
+
 
     private void Change()
     {

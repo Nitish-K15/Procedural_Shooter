@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : Target
+public class Test : MonoBehaviour
 {
-    float Health = 10;
-    public override void TakeDamage(float amount)
+    public BaseEnemy baseEnemy;
+    private void OnTriggerEnter(Collider other)
     {
-        Health = Health - amount;
-        if (Health <= 0)
+        if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
-            GetComponentInParent<EnemyCount>().CheckClear();
+            other.gameObject.GetComponent<FirstPersonController>().TakeDamage(baseEnemy.Damage);
+            Debug.Log("called");
         }
     }
 }

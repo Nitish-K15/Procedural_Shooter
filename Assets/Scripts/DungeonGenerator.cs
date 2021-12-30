@@ -18,15 +18,19 @@ public class DungeonGenerator : MonoBehaviour
         public Vector2Int maxPosition;
 
         public bool obligatory;
+        public int frequency;
 
         public int ProbabilityofSpawn(int x,int y) //0 - cannot spawn,1 - can spawn, 2 - HAS to spawn
         {
             if(x >= minPosition.x && x<= maxPosition.x && y >= minPosition.y && y <= maxPosition.y)
             {
-                if (obligatory)
-                    return 2;
-                else
-                    return 1;
+                if (frequency > 0)
+                {
+                    if (obligatory)
+                        return 2;
+                    else
+                        return 1;
+                }
             }
             return 0;
         }
@@ -81,6 +85,7 @@ public class DungeonGenerator : MonoBehaviour
                         }
                     }
                     var newRoom = Instantiate(rooms[randomRoom].room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehaviour>();
+                    rooms[randomRoom].frequency--;
                     newRoom.UpdateRoom(currentCell.status);
                     newRoom.name += " " + i + "-" + j;
                 }
