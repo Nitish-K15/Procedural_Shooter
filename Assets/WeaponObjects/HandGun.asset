@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b7bb0109731874cbb3911eeac12e84, type: 3}
   m_Name: HandGun
   m_EditorClassIdentifier: 
-  Damage: 5
+  Damage: 50
   range: 10
   spread: 0.1
   reloadTime: 0.5

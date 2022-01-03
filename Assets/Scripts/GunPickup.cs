@@ -6,6 +6,8 @@ public class GunPickup : Interactable
 {
     public GameObject gunContainer;
     public Gun gunscript;
+    public delegate void GunPicked();
+    public static event GunPicked ChangeGun;
 
     private void Start()
     {
@@ -22,5 +24,12 @@ public class GunPickup : Interactable
         GetComponent<BoxCollider>().enabled = false;
         gunscript.enabled = true;
         WeaponSwitching.selectedWeapon++;
+        ChangeGun();
+        Invoke(nameof(DisableScipt), 0.8f);
+    }
+
+    void DisableScipt()
+    {
+        this.enabled = false;
     }
 }

@@ -5,10 +5,15 @@ using UnityEngine;
 public class WeaponSwitching : MonoBehaviour
 {
     public static int selectedWeapon = 0;
-    public static int GunId;
-    private void Awake()
+
+    private void OnEnable()
     {
-        GunId = 0;
+        GunPickup.ChangeGun += SelectWeapon;
+    }
+
+    private void OnDisable()
+    {
+        GunPickup.ChangeGun -= SelectWeapon;
     }
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,7 @@ public class WeaponSwitching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(selectedWeapon);
         int previousSelectedWeapon = selectedWeapon;
         if(Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
