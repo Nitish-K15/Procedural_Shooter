@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChaseEnemy : MonoBehaviour
 {
-    protected Transform[] targets = new Transform[4];
+    protected Transform[] targets = new Transform[3];
     int j = 1;
     public FollowEnemy[] childs;
     int k = 0;
@@ -22,7 +22,7 @@ public class ChaseEnemy : MonoBehaviour
     {
         foreach(FollowEnemy child in childs)
         {
-            child.target = targets[k];
+            //child.target = targets[k];
             k++;
         }
     }

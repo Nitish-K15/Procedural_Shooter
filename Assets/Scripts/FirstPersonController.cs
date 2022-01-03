@@ -7,6 +7,7 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     public static int orbsCollected = 1;
+    public static bool isDead;
 
     public bool CanMove { get; private set; } = true;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
@@ -22,7 +23,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
 
     [Header("Movement Parameters")]
-    [SerializeField] private float walkspeed = 3.0f;
+    [SerializeField] public float walkspeed = 3.0f;
     [SerializeField] private float sprintspeed = 6.0f;
 
     [Header("Look Parameters")]
@@ -38,6 +39,8 @@ public class FirstPersonController : MonoBehaviour
     private Camera playerCamera;
     private CharacterController characterController;
     private Animator anim;
+
+    public float currentSpeed;
 
     private Vector3 MoveDirection;
     private Vector2 CurrentInput;
@@ -61,6 +64,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
+        currentSpeed = characterController.velocity.magnitude;
         if(CanMove)
         {
             HandleMovement();
@@ -114,8 +118,36 @@ public class FirstPersonController : MonoBehaviour
     {
         if (!isHit)
             StartCoroutine(ApplyDamage(damage));
+        if(Health<=0)
+        {
+
+            StartCoroutine(Dying());
+        }
     }
 
+    public void ApplyImpact(float impactForce,float Damage)
+    {
+        StartCoroutine(Impact(impactForce));
+        Debug.Log("Yes");
+    }
+
+    IEnumerator Impact(float impactForce)
+    {
+        characterController.enabled = false;
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<Rigidbody>().AddForce(-transform.forward * impactForce, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        characterController.enabled = true;
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
+    IEnumerator Dying()
+    {
+        isDead = true;
+        anim.enabled = true;
+        anim.SetBool("isDead", true);
+        CanMove = false;
+        yield return null;
+    }
     IEnumerator ApplyDamage(int damage)
     {
         isHit = true;

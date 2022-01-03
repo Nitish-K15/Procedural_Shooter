@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5545207513189588878}
   - component: {fileID: 5545207513189588874}
   - component: {fileID: 5545207513189588873}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,3 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseEnemy: {fileID: 11400000, guid: 341f5c1aafb683e4f80cbc9be81a656f, type: 2}
   explosion: {fileID: 131164, guid: 3c5f4e32698bdb04eaed647f60310510, type: 3}
+  isFire: 1

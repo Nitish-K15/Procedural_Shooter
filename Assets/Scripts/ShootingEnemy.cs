@@ -14,6 +14,7 @@ public class ShootingEnemy :Target
     private bool alreadyAttacked;
     private float Health;
     private Animator anim;
+    private bool isDead;
 
     void Start()
     {
@@ -26,13 +27,17 @@ public class ShootingEnemy :Target
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(target.position, transform.position) > Base.AttackRange)
-            playerInAttackRange = false;
-        else
-            playerInAttackRange = true;
-        if (!playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange) AttackPlayer();
+        if (!isDead)
+        {
+            if (Vector3.Distance(target.position, transform.position) > Base.AttackRange)
+                playerInAttackRange = false;
+            else
+                playerInAttackRange = true;
+            if (!playerInAttackRange) ChasePlayer();
+            if (playerInAttackRange) AttackPlayer();
+        }
     }
+
 
     private void ChasePlayer()
     {
@@ -66,21 +71,39 @@ public class ShootingEnemy :Target
 
     public override void TakeDamage(float amount)
     {
-        Health = Health - amount;
-        if (Health <= 0)
-            Destroy(this.gameObject);
+        if (!isDead)
+        {
+            Health = Health - amount;
+            if (Health <= 0)
+            {
+                isDead = true;
+                StartCoroutine(Dying());
+            }
+        }
     }
+
+
+    IEnumerator Dying()
+    {
+        anim.SetBool("Run", false);
+        anim.SetBool("Attack", false);
+        anim.SetBool("isDead", true);
+        GetComponentInParent<EnemyCount>().CheckClear();
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+    }
+
 
     public void ShootFire()
     {
-            Rigidbody rb = Instantiate(projectile, FireSpawn.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 3f, ForceMode.Impulse);
+        Rigidbody rb = Instantiate(projectile, FireSpawn.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
+        rb.AddForce(transform.up * 3f, ForceMode.Impulse);
     }
 
     public void ShootLightning()
     {
         Rigidbody rb = Instantiate(projectile, FireSpawn.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-        rb.AddForce((target.transform.position - this.transform.position).normalized*10f, ForceMode.Impulse);
+        rb.AddForce((target.transform.position - this.transform.position).normalized * 10f, ForceMode.Impulse);
     }
 }

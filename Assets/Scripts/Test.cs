@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    public BaseEnemy baseEnemy;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<FirstPersonController>().TakeDamage(baseEnemy.Damage);
-            Debug.Log("called");
-        }
+        other.gameObject.GetComponent<FirstPersonController>().ApplyImpact(10f, 10f);
     }
 }

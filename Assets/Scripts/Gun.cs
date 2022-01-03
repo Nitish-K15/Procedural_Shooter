@@ -10,24 +10,35 @@ public class Gun : MonoBehaviour
     int bulletsLeft,bulletsShot;
     public ParticleSystem muzzleFlash;
     public GameObject impactPoint;
-    public Text text;
+    public GameObject text;
     private float finalDamage;
     private float finalRange;
     private int finalMagazineSize;
     private float finalFireDelay;
     private float finalAccuracy;
+    private Text ammo;
+
+    private void Awake()
+    {
+        text = GameObject.FindWithTag("Ammo"); 
+    }
+
 
     private void Start()
     {
         bulletsLeft = weaponBase.magazineSize;
+        ammo = text.GetComponent<Text>();
         readyToShoot = true;
     }
 
     private void Update()
     {
-        MyInput();
-        Values();
-        text.text = bulletsLeft + " / " + finalMagazineSize;
+        if (!FirstPersonController.isDead)
+        {
+            MyInput();
+            Values();
+            ammo.text = bulletsLeft + " / " + finalMagazineSize;
+        }
     }
 
     private void MyInput()
@@ -75,13 +86,11 @@ public class Gun : MonoBehaviour
                 target.TakeDamage(finalDamage);
             }
             GameObject impactGO = Instantiate(impactPoint, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impactGO, 0.3f);
+            Destroy(impactGO, 0.2f);
         }
 
-        Debug.Log(finalDamage);
         bulletsLeft--;
         bulletsShot--;
-
         Invoke("ResetShot", finalFireDelay);
 
         if (bulletsShot > 0 && bulletsLeft > 0)
@@ -95,11 +104,13 @@ public class Gun : MonoBehaviour
     private void Reload()
     {
         reloading = true;
+        GetComponentInParent<WeaponSway>().weaponAnimator.SetBool("Reloading", true);
         Invoke("ReloadFinished", weaponBase.reloadTime);
     }
     private void ReloadFinished()
     {
         bulletsLeft = finalMagazineSize;
+        GetComponentInParent<WeaponSway>().weaponAnimator.SetBool("Reloading", false);
         reloading = false;
     }
 }

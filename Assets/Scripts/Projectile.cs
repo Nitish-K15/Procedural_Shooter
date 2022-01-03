@@ -6,9 +6,23 @@ public class Projectile : MonoBehaviour
 {
     public BaseEnemy baseEnemy;
     public GameObject explosion;
+    public bool isFire;
 
+    //private void Awake()
+    //{
+    //    if (isFire)
+    //    {
+    //        GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
+    //        GetComponent<Rigidbody>().AddForce(transform.up * 3f, ForceMode.Impulse);
+    //    }
+    //    else
+    //    {
+    //        GetComponent<Rigidbody>().AddForce(transform.forward * 100f);
+    //    }
+    //}
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.name);
         if (explosion)
         {
             GameObject e = Instantiate(explosion, this.transform.position, Quaternion.identity);

@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
+  - Upgrade
+  - GunHolder
+  - Health
+  - Ammo
   layers:
   - Default
   - TransparentFX
@@ -17,10 +21,10 @@ TagManager:
   - Player
   - FireLayer
   - Weapom
-  - 
-  - 
-  - 
-  - 
+  - Postprocessing
+  - Enemies
+  - Door
+  - PlayerEnter
   - 
   - 
   - 

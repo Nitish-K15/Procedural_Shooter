@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b7bb0109731874cbb3911eeac12e84, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
-  Damage: 20
+  Damage: 100
   range: 15
   spread: 0.2
   reloadTime: 0.7
