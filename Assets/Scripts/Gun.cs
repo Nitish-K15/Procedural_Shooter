@@ -104,13 +104,17 @@ public class Gun : MonoBehaviour
     private void Reload()
     {
         reloading = true;
-        GetComponentInParent<WeaponSway>().weaponAnimator.SetBool("Reloading", true);
+        GetComponentInParent<WeaponSway>().weaponAnimator.SetBool("Reloading",true);
+        //GetComponentInParent<WeaponSway>().weaponAnimator.applyRootMotion = false;
+        //GetComponentInParent<WeaponSway>().weaponAnimator.Play("Reloading");
         Invoke("ReloadFinished", weaponBase.reloadTime);
     }
     private void ReloadFinished()
     {
         bulletsLeft = finalMagazineSize;
         GetComponentInParent<WeaponSway>().weaponAnimator.SetBool("Reloading", false);
+        //GetComponentInParent<WeaponSway>().weaponAnimator.applyRootMotion = true;
+        //GetComponentInParent<WeaponSway>().weaponAnimator.Play("ReloadComplete");
         reloading = false;
     }
 }
