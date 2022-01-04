@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public BaseEnemy baseEnemy;
     public GameObject explosion;
     public bool isFire;
+    public AudioClip blast;
 
     //private void Awake()
     //{
@@ -23,6 +24,7 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name);
+        SoundManager.Instance.Play(blast);
         if (explosion)
         {
             GameObject e = Instantiate(explosion, this.transform.position, Quaternion.identity);

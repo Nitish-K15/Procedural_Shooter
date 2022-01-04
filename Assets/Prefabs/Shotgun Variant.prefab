@@ -28,7 +28,13 @@ MonoBehaviour:
   weaponBase: {fileID: 11400000, guid: 8ba0dc0f83e06f34a80ebf42d9e2d4bf, type: 2}
   muzzleFlash: {fileID: 5413343899878178052}
   impactPoint: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
-  text: {fileID: 0}
+  AmmoTexts: {fileID: 0}
+  DamageText: {fileID: 0}
+  RangeText: {fileID: 0}
+  AccuracyText: {fileID: 0}
+  FireDelayText: {fileID: 0}
+  shoot: {fileID: 8300000, guid: eb847b336c91d844295aeae2d78759ef, type: 3}
+  reload: {fileID: 8300000, guid: 03bb8a6993464664f928af5fb2a9f465, type: 3}
 --- !u!114 &165384620
 MonoBehaviour:
   m_ObjectHideFlags: 0

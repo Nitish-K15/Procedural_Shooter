@@ -98,6 +98,8 @@ MonoBehaviour:
   Health: 0
   agent: {fileID: 0}
   baseEnemy: {fileID: 11400000, guid: a662ec200eb69ce4cae35c29867c2578, type: 2}
+  alive: {fileID: 8300000, guid: c1fa6c0dcbbda4c4ca50a82e52644652, type: 3}
+  dying: {fileID: 8300000, guid: e1cc35f3e97ecc14bac6f045db796a57, type: 3}
 --- !u!195 &688662837
 NavMeshAgent:
   m_ObjectHideFlags: 0

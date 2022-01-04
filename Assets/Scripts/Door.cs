@@ -5,6 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     private Animator dooranim;
+    public AudioClip doorOpen, doorClosed;
 
     private void Start()
     {
@@ -27,12 +28,14 @@ public class Door : MonoBehaviour
     void DoorOpen()
     {
         dooranim.Play("DoorOpening");
+        SoundManager.Instance.Play(doorOpen);
         Debug.Log("Open");
     }
 
     void DoorClosed()
     {
         dooranim.Play("DoorClosing");
+        SoundManager.Instance.Play(doorClosed);
         Debug.Log("Closed");
     }
 }

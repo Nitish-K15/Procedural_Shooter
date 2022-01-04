@@ -17,6 +17,7 @@ public class Gun : MonoBehaviour
     private float finalFireDelay;
     private float finalAccuracy;
     private Text ammo,damage,range,accuracy,firedelay;
+    public AudioClip shoot, reload;
 
     private void Awake()
     {
@@ -89,6 +90,7 @@ public class Gun : MonoBehaviour
 
         Vector3 direction = Camera.main.transform.forward + new Vector3(x, y, 0);
         muzzleFlash.Play();
+        SoundManager.Instance.Play(shoot);
         RaycastHit hit;
        if(Physics.Raycast(Camera.main.transform.position, direction,out hit,finalRange))
         {
@@ -125,6 +127,7 @@ public class Gun : MonoBehaviour
     {
         bulletsLeft = finalMagazineSize;
         GetComponentInParent<WeaponSway>().weaponAnimator.SetBool("Reloading", false);
+        SoundManager.Instance.Play(reload);
         //GetComponentInParent<WeaponSway>().weaponAnimator.applyRootMotion = true;
         //GetComponentInParent<WeaponSway>().weaponAnimator.Play("ReloadComplete");
         reloading = false;

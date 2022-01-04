@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217470cff6a7c48448dec7192a4b8da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorOpen: {fileID: 8300000, guid: 8065924a6175c7040aadde4223f9f1e8, type: 3}
+  doorClosed: {fileID: 8300000, guid: 89a13b9e08c319946bc6114f07d79209, type: 3}
 --- !u!65 &907243485930966244
 BoxCollider:
   m_ObjectHideFlags: 0

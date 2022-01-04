@@ -12,6 +12,7 @@ public class FollowEnemy : Target
     private Animator anim;
     private FirstPersonController _player;
     private bool isDead;
+    public AudioClip alive, dying;
 
     private void Awake()
     {
@@ -51,7 +52,7 @@ public class FollowEnemy : Target
             agent.SetDestination(player.transform.position);
             return;
         }
-
+        SoundManager.Instance.Play(alive);
         float lookAhead = targetDir.magnitude / (agent.speed + _player.currentSpeed);
         agent.SetDestination(player.transform.position + player.transform.forward * lookAhead * 2);
     }
@@ -93,6 +94,8 @@ public class FollowEnemy : Target
         anim.SetBool("Run", false);
         anim.SetBool("Attack", false);
         anim.SetBool("isDead", true);
+        agent.speed = 0f;
+        SoundManager.Instance.Play(dying);
         GetComponentInParent<EnemyCount>().CheckClear();
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
