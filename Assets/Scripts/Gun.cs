@@ -10,24 +10,32 @@ public class Gun : MonoBehaviour
     int bulletsLeft,bulletsShot;
     public ParticleSystem muzzleFlash;
     public GameObject impactPoint;
-    public GameObject text;
+    public GameObject AmmoTexts,DamageText,RangeText,AccuracyText,FireDelayText;
     private float finalDamage;
     private float finalRange;
     private int finalMagazineSize;
     private float finalFireDelay;
     private float finalAccuracy;
-    private Text ammo;
+    private Text ammo,damage,range,accuracy,firedelay;
 
     private void Awake()
     {
-        text = GameObject.FindWithTag("Ammo"); 
+        AmmoTexts = GameObject.FindWithTag("Ammo");
+        DamageText = GameObject.FindWithTag("Damage");
+        RangeText = GameObject.FindWithTag("Range");
+        AccuracyText = GameObject.FindWithTag("Accuracy");
+        FireDelayText = GameObject.FindWithTag("FireDelay");
     }
 
 
     private void Start()
     {
         bulletsLeft = weaponBase.magazineSize;
-        ammo = text.GetComponent<Text>();
+        ammo = AmmoTexts.GetComponent<Text>();
+        damage = DamageText.GetComponent<Text>();
+        range = RangeText.GetComponent<Text>();
+        accuracy = AccuracyText.GetComponent<Text>();
+        firedelay = FireDelayText.GetComponent<Text>();
         readyToShoot = true;
     }
 
@@ -39,6 +47,10 @@ public class Gun : MonoBehaviour
             Values();
             ammo.text = bulletsLeft + " / " + finalMagazineSize;
         }
+        damage.text = " "+ finalDamage;
+        range.text = " " + finalRange;
+        accuracy.text = " " + finalAccuracy;
+        firedelay.text = " " + finalFireDelay;
     }
 
     private void MyInput()

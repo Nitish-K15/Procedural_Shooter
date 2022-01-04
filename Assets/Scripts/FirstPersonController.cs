@@ -52,6 +52,8 @@ public class FirstPersonController : MonoBehaviour
     public int Health;
     public GameObject redScreen;
     public bool isHit;
+
+    public Text healthtext, speedtext;
    
     void Start()
     {
@@ -74,6 +76,8 @@ public class FirstPersonController : MonoBehaviour
             ApplyFinalMovement();
         }
         finalSpeed = walkspeed + Modifiers.instance.Speed;
+        speedtext.text = " " + finalSpeed;
+        healthtext.text = " " + Health;
         weaponAnimationSpeed = characterController.velocity.magnitude / finalSpeed;
         if(weaponAnimationSpeed>1)
         {

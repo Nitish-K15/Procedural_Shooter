@@ -9,6 +9,11 @@ TagManager:
   - GunHolder
   - Health
   - Ammo
+  - MagaSize
+  - Damage
+  - Accuracy
+  - Range
+  - FireDelay
   layers:
   - Default
   - TransparentFX
