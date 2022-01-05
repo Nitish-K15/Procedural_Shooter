@@ -30,7 +30,7 @@ public class FollowEnemy : Target
 
     private void Update()
     {
-        if (!isDead)
+        if (!isDead && !FirstPersonController.stop)
         {
             adsrc.PlayOneShot(alive);
             if (Vector3.Distance(player.position, transform.position) >= baseEnemy.AttackRange)

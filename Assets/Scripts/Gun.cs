@@ -42,7 +42,7 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        if (!FirstPersonController.isDead)
+        if (!FirstPersonController.isDead && !FirstPersonController.stop)
         {
             MyInput();
             Values();

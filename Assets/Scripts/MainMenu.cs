@@ -30,6 +30,11 @@ public class MainMenu : MonoBehaviour
         titleScreen.SetActive(true);
     }
 
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
     public void End()
     {
         Application.Quit();

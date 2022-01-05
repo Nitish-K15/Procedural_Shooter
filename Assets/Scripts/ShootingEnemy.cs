@@ -27,7 +27,7 @@ public class ShootingEnemy :Target
     // Update is called once per frame
     void Update()
     {
-        if (!isDead)
+        if (!isDead && !FirstPersonController.stop)
         {
             if (Vector3.Distance(target.position, transform.position) > Base.AttackRange)
                 playerInAttackRange = false;

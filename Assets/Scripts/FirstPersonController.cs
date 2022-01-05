@@ -54,6 +54,10 @@ public class FirstPersonController : MonoBehaviour
     public bool isHit;
 
     public Text healthtext, speedtext,upgradetext;
+
+    public static bool stop;
+    public bool isPaused;
+    public GameObject pause;
    
     void Start()
     {
@@ -74,6 +78,10 @@ public class FirstPersonController : MonoBehaviour
             if (canJump)
                 HandleJump();
             ApplyFinalMovement();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) && !isDead) //Pause Menu
+        {
+            Pause();
         }
         finalSpeed = walkspeed + Modifiers.instance.Speed;
         speedtext.text = " " + finalSpeed;
@@ -121,15 +129,35 @@ public class FirstPersonController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!isHit)
-            StartCoroutine(ApplyDamage(damage));
-        if(Health<=0)
+        if (!isHit && !isDead)
         {
-
-            StartCoroutine(Dying());
+            StartCoroutine(ApplyDamage(damage));
         }
     }
 
+    void Pause()
+    {
+        if (!isPaused)
+        {
+            pause.SetActive(true);
+            Time.timeScale = 0;
+            CanMove = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            stop = true;
+            isPaused = true;
+        }
+        else
+        {
+            pause.SetActive(false);
+            Time.timeScale = 1;
+            stop = false;
+            CanMove = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            isPaused = false;
+        }
+    }
     public void ApplyImpact(float impactForce,int Damage)
     {
         StartCoroutine(Impact(impactForce));
@@ -152,7 +180,8 @@ public class FirstPersonController : MonoBehaviour
         anim.enabled = true;
         anim.SetBool("isDead", true);
         CanMove = false;
-        yield return null;
+        yield return new WaitForSecondsRealtime(2f);
+        Pause();
     }
     IEnumerator ApplyDamage(int damage)
     {
@@ -161,6 +190,11 @@ public class FirstPersonController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         redScreen.SetActive(false);
         Health = Health - damage;
+        if (Health <= 0)
+        {
+            Health = 0;
+            StartCoroutine(Dying());
+        }
         yield return new WaitForSeconds(0.5f);
         isHit = false;
     }
@@ -177,6 +211,10 @@ public class FirstPersonController : MonoBehaviour
             orbsCollected++;
             Destroy(other.gameObject);
             Debug.Log("Upgrade");
+        }
+        if(other.gameObject.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene("Credits");
         }
     }
 }
