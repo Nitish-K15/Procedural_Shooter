@@ -8,6 +8,7 @@ public class GunPickup : Interactable
     public Gun gunscript;
     public delegate void GunPicked();
     public static event GunPicked ChangeGun;
+    public AudioClip pickup;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class GunPickup : Interactable
         GetComponent<BoxCollider>().enabled = false;
         gunscript.enabled = true;
         WeaponSwitching.selectedWeapon++;
+        SoundManager.Instance.Play(pickup);
         ChangeGun();
         Invoke(nameof(DisableScipt), 0.8f);
     }

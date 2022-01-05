@@ -27,6 +27,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunContainer: {fileID: 0}
   gunscript: {fileID: 2149857523696787820}
+  pickup: {fileID: 8300000, guid: 4e0e48fdbcede5a489674e64c21df74e, type: 3}
 --- !u!114 &2149857523696787820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,7 +48,7 @@ MonoBehaviour:
   RangeText: {fileID: 0}
   AccuracyText: {fileID: 0}
   FireDelayText: {fileID: 0}
-  shoot: {fileID: 8300000, guid: a987b7c9504a3224f9744f996ba8b519, type: 3}
+  shoot: {fileID: 8300000, guid: 8704c2b7608504048ac93d4966faf63e, type: 3}
   reload: {fileID: 8300000, guid: 03bb8a6993464664f928af5fb2a9f465, type: 3}
 --- !u!1001 &3452747016537790586
 PrefabInstance:

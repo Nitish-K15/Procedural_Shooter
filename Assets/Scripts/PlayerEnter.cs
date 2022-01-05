@@ -7,7 +7,7 @@ public class PlayerEnter : MonoBehaviour
     public delegate void ClickAction();
     public static event ClickAction RoomEntered;
     private bool Entered;
-
+    public bool isItemRoom;
 
 
     private void OnTriggerEnter(Collider other)
@@ -18,7 +18,8 @@ public class PlayerEnter : MonoBehaviour
             {
                 gameObject.transform.GetChild(0).gameObject.SetActive(true);
                 Entered = true;
-                RoomEntered();
+                if(!isItemRoom)
+                    RoomEntered();
             }
         }
     }

@@ -53,7 +53,7 @@ public class FirstPersonController : MonoBehaviour
     public GameObject redScreen;
     public bool isHit;
 
-    public Text healthtext, speedtext;
+    public Text healthtext, speedtext,upgradetext;
    
     void Start()
     {
@@ -77,8 +77,9 @@ public class FirstPersonController : MonoBehaviour
         }
         finalSpeed = walkspeed + Modifiers.instance.Speed;
         speedtext.text = " " + finalSpeed;
-        healthtext.text = " " + Health;
+        healthtext.text = "" + Health;
         weaponAnimationSpeed = characterController.velocity.magnitude / finalSpeed;
+        upgradetext.text = ""+orbsCollected;
         if(weaponAnimationSpeed>1)
         {
             weaponAnimationSpeed = 1;
@@ -129,9 +130,10 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
-    public void ApplyImpact(float impactForce,float Damage)
+    public void ApplyImpact(float impactForce,int Damage)
     {
         StartCoroutine(Impact(impactForce));
+        TakeDamage(Damage);
         Debug.Log("Yes");
     }
 
@@ -161,5 +163,20 @@ public class FirstPersonController : MonoBehaviour
         Health = Health - damage;
         yield return new WaitForSeconds(0.5f);
         isHit = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Health"))
+        {
+            Health += 10;
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.CompareTag("Upgrade"))
+        {
+            orbsCollected++;
+            Destroy(other.gameObject);
+            Debug.Log("Upgrade");
+        }
     }
 }

@@ -6,6 +6,6 @@ public class Test : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<FirstPersonController>().ApplyImpact(10f, 10f);
+        other.gameObject.GetComponent<FirstPersonController>().ApplyImpact(10f, 10);
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : Target
 {
  
     public int attackRange = 3;
@@ -10,11 +10,13 @@ public class Boss : MonoBehaviour
     private Animator anim;
     private int attackType;
     private bool setForce = false;
+    public float Health = 100f;
     private Vector3 direction;
+    public GameObject treasure;
 
     void Start()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.FindWithTag("Player").transform;
         anim = GetComponent<Animator>();
     }
     private void Update()
@@ -54,14 +56,20 @@ public class Boss : MonoBehaviour
                 {
                     setForce = true;
                 }
-                if (setForce && anim.GetCurrentAnimatorStateInfo(0).normalizedTime> 0.5f)
+                if (setForce && anim.GetCurrentAnimatorStateInfo(0).normalizedTime> 0.5f && !anim.GetBool("isRunning"))
                 {
-                        player.gameObject.GetComponent<FirstPersonController>().ApplyImpact(6f,10f);
-                        if (direction.magnitude <=3f)
+                    if (attackType == 2 && direction.magnitude > 6f)
+                    {
+                        player.gameObject.GetComponent<FirstPersonController>().ApplyImpact(6f, 10);
+                    }
+                    else
+                    {
+                        if (direction.magnitude <= 3f)
                         {
-                        Debug.Log("Damage Player");
+                            player.gameObject.GetComponent<FirstPersonController>().ApplyImpact(6f, 10);
                         }
-                        setForce = false;
+                    }
+                    setForce = false;
                 }
             }
         }
@@ -70,6 +78,25 @@ public class Boss : MonoBehaviour
             anim.SetBool("isRunning", false);
             anim.SetInteger("isAttacking", 0);
         }
+    }
+
+    public override void TakeDamage(float amount)
+    {
+        if (!anim.GetBool("isDead"))
+        {
+            Health = Health - amount;
+            if (Health <= 0)
+            {
+                anim.SetBool("isDead", true);
+                StartCoroutine(Dying());
+            }
+        }
+    }
+
+    IEnumerator Dying()
+    {
+        yield return new WaitForSeconds(0.5f);
+        treasure.SetActive(true);
     }
 
 }

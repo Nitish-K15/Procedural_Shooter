@@ -13,6 +13,7 @@ public class FollowEnemy : Target
     private FirstPersonController _player;
     private bool isDead;
     public AudioClip alive, dying;
+    private AudioSource adsrc;
 
     private void Awake()
     {
@@ -24,12 +25,14 @@ public class FollowEnemy : Target
         Health = baseEnemy.Health;
         anim = GetComponent<Animator>();
         _player = player.GetComponent<FirstPersonController>();;
+        adsrc = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
         if (!isDead)
         {
+            adsrc.PlayOneShot(alive);
             if (Vector3.Distance(player.position, transform.position) >= baseEnemy.AttackRange)
                 Pursue();
             else
@@ -52,7 +55,7 @@ public class FollowEnemy : Target
             agent.SetDestination(player.transform.position);
             return;
         }
-        SoundManager.Instance.Play(alive);
+        //SoundManager.Instance.Play(alive);
         float lookAhead = targetDir.magnitude / (agent.speed + _player.currentSpeed);
         agent.SetDestination(player.transform.position + player.transform.forward * lookAhead * 2);
     }
@@ -95,7 +98,8 @@ public class FollowEnemy : Target
         anim.SetBool("Attack", false);
         anim.SetBool("isDead", true);
         agent.speed = 0f;
-        SoundManager.Instance.Play(dying);
+        adsrc.PlayOneShot(dying);
+        //SoundManager.Instance.Play(dying);
         GetComponentInParent<EnemyCount>().CheckClear();
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);

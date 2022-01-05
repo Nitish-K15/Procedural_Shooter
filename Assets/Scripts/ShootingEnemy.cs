@@ -86,6 +86,7 @@ public class ShootingEnemy :Target
     IEnumerator Dying()
     {
         anim.SetBool("Run", false);
+        agent.speed = 0f;
         anim.SetBool("Attack", false);
         anim.SetBool("isDead", true);
         GetComponentInParent<EnemyCount>().CheckClear();

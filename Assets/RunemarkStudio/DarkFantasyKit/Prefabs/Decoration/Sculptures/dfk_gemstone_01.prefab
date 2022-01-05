@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4987666495478334}
   - component: {fileID: 33944598971034734}
   - component: {fileID: 23114908486235698}
-  - component: {fileID: 64497074515880722}
+  - component: {fileID: 1989988524410958967}
   m_Layer: 0
   m_Name: dfk_gemstone_01
   m_TagString: Upgrade
@@ -80,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64497074515880722
-MeshCollider:
+--- !u!135 &1989988524410958967
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +90,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: eeabe1291c17995439234cea889fdd47, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.117799684
+  m_Center: {x: 0.000000014901161, y: -0.025380358, z: 0.000000014901161}

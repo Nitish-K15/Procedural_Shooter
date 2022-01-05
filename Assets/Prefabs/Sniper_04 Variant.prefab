@@ -27,6 +27,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunContainer: {fileID: 0}
   gunscript: {fileID: 2525720378343042935}
+  pickup: {fileID: 8300000, guid: 4e0e48fdbcede5a489674e64c21df74e, type: 3}
 --- !u!114 &2525720378343042935
 MonoBehaviour:
   m_ObjectHideFlags: 0
