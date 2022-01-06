@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
 {
-    public static int orbsCollected = 1;
+    public static int orbsCollected;
     public static bool isDead;
 
     public bool CanMove { get; private set; } = true;
@@ -58,7 +58,12 @@ public class FirstPersonController : MonoBehaviour
     public static bool stop;
     public bool isPaused;
     public GameObject pause;
-   
+
+    private void Awake()
+    {
+        orbsCollected = 0;    
+    }
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -215,6 +220,8 @@ public class FirstPersonController : MonoBehaviour
         if(other.gameObject.CompareTag("Finish"))
         {
             SceneManager.LoadScene("Credits");
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
         }
     }
 }

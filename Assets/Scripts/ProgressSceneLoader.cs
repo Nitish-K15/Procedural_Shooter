@@ -38,6 +38,7 @@ public class ProgressSceneLoader : MonoBehaviour
 		}
 
 		UpdateProgressUI(operation.progress);
+		yield return new WaitForSeconds(1f);
 		operation = null;
 		canvas.gameObject.SetActive(false);
 	}
