@@ -29,13 +29,11 @@ public class Door : MonoBehaviour
     {
         dooranim.Play("DoorOpening");
         SoundManager.Instance.Play(doorOpen);
-        Debug.Log("Open");
     }
 
     void DoorClosed()
     {
         dooranim.Play("DoorClosing");
         SoundManager.Instance.Play(doorClosed);
-        Debug.Log("Closed");
     }
 }

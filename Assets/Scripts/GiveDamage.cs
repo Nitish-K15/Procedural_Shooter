@@ -10,7 +10,6 @@ public class GiveDamage : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<FirstPersonController>().TakeDamage(baseEnemy.Damage);
-            Debug.Log("called");
         }
     }
 }

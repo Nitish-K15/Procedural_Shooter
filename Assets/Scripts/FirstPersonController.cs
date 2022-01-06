@@ -215,7 +215,6 @@ public class FirstPersonController : MonoBehaviour
         {
             orbsCollected++;
             Destroy(other.gameObject);
-            Debug.Log("Upgrade");
         }
         if(other.gameObject.CompareTag("Finish"))
         {
